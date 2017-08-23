@@ -1,15 +1,15 @@
 FROM alpine:3.6
 
-RUN apk add --update --no-cache --virtual build-dependencies \
+RUN apk add --update --no-cache --virtual .build-deps \
    build-base \
    openssl-dev \
-   unzip \
    lua-dev \
    luarocks \
+   unzip \
 && luarocks-5.1 install luaossl \
-&& apk del build-dependencies \
+&& apk del .build-deps \
 && apk add --update --no-cache \
-   openssl-dev \
+   openssl \
    lua
 
 COPY example.lua .
